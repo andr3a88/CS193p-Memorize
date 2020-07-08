@@ -50,10 +50,69 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
 
     struct Card: Identifiable {
         var id: Int
-
-        var isFaceUp: Bool = false
-        var isMacthed: Bool = false
         var content: CardContent
+
+        var isFaceUp: Bool = false {
+            didSet {
+                if isFaceUp {
+                    startUsingBonustime()
+                } else {
+                    stoptUsingBonustime()
+                }
+            }
+        }
+
+        var isMacthed: Bool = false {
+            didSet {
+                stoptUsingBonustime()
+            }
+        }
+
+        // MARK: - Bonus time
+
+        // can be zero which means "no bonus available" for this card
+        var bonusTimeLimit: TimeInterval = 6
+
+        // how long this card has ever been face up
+        private var faceUpTime: TimeInterval {
+            if let lastFaceUpDate = self.lastFaceUpDate {
+                return pastFaceUpTime + Date().timeIntervalSince(lastFaceUpDate)
+            } else {
+                return pastFaceUpTime
+            }
+        }
+
+        var lastFaceUpDate: Date?
+
+        var pastFaceUpTime: TimeInterval = 0
+
+        var bonusTimeRemaining: TimeInterval {
+            max(0, bonusTimeLimit - faceUpTime)
+        }
+
+        // percentage of bonus time remaining
+        var bonusRemaining: Double {
+            (bonusTimeLimit > 0 && bonusTimeRemaining > 0) ? bonusTimeRemaining/bonusTimeLimit : 0
+        }
+
+        var hasEarnedBonus: Bool {
+             isMacthed && bonusTimeRemaining > 0
+        }
+
+        var isConsumingBonusTime: Bool {
+             isFaceUp && !isMacthed && bonusTimeRemaining > 0
+        }
+
+        private mutating func startUsingBonustime() {
+            if isConsumingBonusTime, lastFaceUpDate == nil {
+                lastFaceUpDate = Date()
+            }
+        }
+
+        private mutating func stoptUsingBonustime() {
+            pastFaceUpTime = faceUpTime
+            self.lastFaceUpDate = nil
+        }
     }
 }
 
