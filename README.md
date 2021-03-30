@@ -110,3 +110,35 @@ A couple of persistence topics (UserDefaults API and JSON encoding/decoding) are
 [Demo Code](https://cs193p.stanford.edu/Spring2020/EmojiArtL8.zip)
 [Assignment 4](https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/a4_0.pdf)
 [Assignment 5](https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/assignment_5.pdf)
+
+## Lecture 9
+
+### Data Flow
+
+Property wrappers (like @Published, @EnvironmentObject, @Binding) are discussed along with Publishers.  EmojiArt then uses these to autosave itself and to support choosing between multiple palettes of emoji.
+
+[Watch Video](https://youtu.be/0i152oA3T3s)
+[Slides](slides_pdf/l9_0.pdf)
+[EmojiArtDocumentPalette.swift](https://web.stanford.edu/class/cs193p/Spring2020/EmojiArtDocumentPalette.swift.zip)
+[Demo Code](https://web.stanford.edu/class/cs193p/Spring2020/EmojiArtL9.zip)
+
+## Lecture 10
+
+[Slides](slides_pdf/l10.pdf)
+
+## Lecture 11
+
+[Slides](slides_pdf/l11.pdf)
+
+## Lecture 12
+
+[Slides](slides_pdf/l12.pdf)
+
+## Lecture 13
+
+[Slides](slides_pdf/l13.pdf)
+
+
+## Lecture 14
+
+[Slides](slides_pdf/l4.pdf)
